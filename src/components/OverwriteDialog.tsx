@@ -5,32 +5,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
-import { Upload } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { OverwriteOptionsEnum } from "@/types/types";
 import { overwriteRadio } from "@/constants/data";
 
 interface IOverwriteDialogProps {
   isOpen: boolean;
-  onOpenChange: (state: boolean) => void;
-  handleOverwrite: () => void;
 }
 
 export default function OverwriteDialog({
   isOpen,
-  onOpenChange,
-  handleOverwrite,
 }: Readonly<IOverwriteDialogProps>) {
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>
-        <Button onClick={handleOverwrite}>
-          <Upload /> Upload
-        </Button>
-      </DialogTrigger>
+    <Dialog open={isOpen}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="mb-4">
           <DialogTitle className="text-xl font-bold ">
