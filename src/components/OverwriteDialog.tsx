@@ -17,7 +17,7 @@ export default function OverwriteDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>
+        <Button onClick={() => console.log("START FROM HERE...")}>
           <Upload /> Upload
         </Button>
       </DialogTrigger>
@@ -27,12 +27,12 @@ export default function OverwriteDialog() {
             Upload Option
           </DialogTitle>
           <DialogDescription>
-            <p className="text-base leading-[26px] font-normal text-grayscale-waterloo">
+            <span className="text-base leading-[26px] font-normal text-grayscale-waterloo block">
               “yourname.jpeg” already exists.
-            </p>
-            <p className="text-base leading-[26px] font-normal text-grayscale-waterloo">
+            </span>
+            <span className="text-base leading-[26px] font-normal text-grayscale-waterloo block">
               Do you want to:
-            </p>
+            </span>
           </DialogDescription>
         </DialogHeader>
         <RadioGroup
