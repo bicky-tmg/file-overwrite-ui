@@ -13,11 +13,21 @@ import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { OverwriteOptionsEnum } from "@/types/types";
 import { overwriteRadio } from "@/constants/data";
 
-export default function OverwriteDialog() {
+interface IOverwriteDialogProps {
+  isOpen: boolean;
+  onOpenChange: (state: boolean) => void;
+  handleOverwrite: () => void;
+}
+
+export default function OverwriteDialog({
+  isOpen,
+  onOpenChange,
+  handleOverwrite,
+}: Readonly<IOverwriteDialogProps>) {
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button onClick={() => console.log("START FROM HERE...")}>
+        <Button onClick={handleOverwrite}>
           <Upload /> Upload
         </Button>
       </DialogTrigger>
