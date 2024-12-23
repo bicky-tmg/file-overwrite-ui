@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { OverwriteOptionsEnum } from "@/types/types";
 import { overwriteRadio } from "@/constants/data";
+import { useState } from "react";
 
 interface IOverwriteDialogProps {
   isOpen: boolean;
@@ -18,6 +19,9 @@ interface IOverwriteDialogProps {
 export default function OverwriteDialog({
   isOpen,
 }: Readonly<IOverwriteDialogProps>) {
+  const [overwriteRadioValue, setOverwriteRadioValue] = useState(
+    OverwriteOptionsEnum.Overwrite
+  );
   return (
     <Dialog open={isOpen}>
       <DialogContent className="sm:max-w-[425px]">
@@ -36,7 +40,9 @@ export default function OverwriteDialog({
         </DialogHeader>
         <RadioGroup
           defaultValue={OverwriteOptionsEnum.Overwrite}
-          onValueChange={() => {}}
+          onValueChange={(val: string) => {
+            setOverwriteRadioValue(val as OverwriteOptionsEnum);
+          }}
         >
           {overwriteRadio.map((radio) => (
             <div className="flex items-center space-x-2" key={radio.id}>
