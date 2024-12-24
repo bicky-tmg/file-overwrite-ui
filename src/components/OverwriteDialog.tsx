@@ -8,20 +8,24 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { OverwriteOptionsEnum } from "@/types/types";
+import { IFile, OverwriteOptionsEnum } from "@/types/types";
 import { overwriteRadio } from "@/constants/data";
-import { useState } from "react";
 
 interface IOverwriteDialogProps {
   isOpen: boolean;
+  handleOverwriteOptionSelected: (action: OverwriteOptionsEnum) => void;
+  currentFile: IFile | null;
+  handleOverwriteRadioValue: (val: OverwriteOptionsEnum) => void;
+  overwriteRadioValue: OverwriteOptionsEnum;
 }
 
 export default function OverwriteDialog({
   isOpen,
+  handleOverwriteOptionSelected,
+  currentFile,
+  handleOverwriteRadioValue,
+  overwriteRadioValue,
 }: Readonly<IOverwriteDialogProps>) {
-  const [overwriteRadioValue, setOverwriteRadioValue] = useState(
-    OverwriteOptionsEnum.Overwrite
-  );
   return (
     <Dialog open={isOpen}>
       <DialogContent className="sm:max-w-[425px]">
@@ -31,7 +35,7 @@ export default function OverwriteDialog({
           </DialogTitle>
           <DialogDescription>
             <span className="text-base leading-[26px] font-normal text-grayscale-waterloo block">
-              “yourname.jpeg” already exists.
+              “{currentFile?.name}” already exists.
             </span>
             <span className="text-base leading-[26px] font-normal text-grayscale-waterloo block">
               Do you want to:
@@ -40,8 +44,9 @@ export default function OverwriteDialog({
         </DialogHeader>
         <RadioGroup
           defaultValue={OverwriteOptionsEnum.Overwrite}
+          value={overwriteRadioValue}
           onValueChange={(val: string) => {
-            setOverwriteRadioValue(val as OverwriteOptionsEnum);
+            handleOverwriteRadioValue(val as OverwriteOptionsEnum);
           }}
         >
           {overwriteRadio.map((radio) => (
@@ -57,7 +62,11 @@ export default function OverwriteDialog({
           ))}
         </RadioGroup>
         <DialogFooter>
-          <Button>OK</Button>
+          <Button
+            onClick={() => handleOverwriteOptionSelected(overwriteRadioValue)}
+          >
+            OK
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

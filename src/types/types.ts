@@ -6,3 +6,18 @@ export enum OverwriteOptionsEnum {
   UploadCopy = "upload-copy",
   Skip = "skip",
 }
+
+export interface IFile {
+  id: number;
+  name: string;
+}
+
+export type ResolveCallbackType =
+  | ((action: OverwriteOptionsEnum) => void)
+  | null;
+
+interface IFileWithSelectedOption extends IFile {
+  option: OverwriteOptionsEnum;
+}
+
+export type FilesWithSelectedOptionType = IFileWithSelectedOption[];
